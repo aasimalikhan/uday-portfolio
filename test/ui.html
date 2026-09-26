@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>UI harness (dev only)</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <style>
+    body { background: radial-gradient(circle at 30% 30%, #1a2150, #070A18); }
+    #dev { position: fixed; left: 16px; top: 180px; z-index: 15; display: flex; flex-direction: column; gap: 4px; width: 150px; max-height: 60vh; overflow: auto; }
+    #dev button { font-size: 11px; padding: 4px 6px; border-radius: 6px; border: 1px solid #334; background: #111733; text-align: left; }
+  </style>
+</head>
+<body>
+  <div id="flash" aria-hidden="true"></div>
+  <div id="dev"></div>
+  <!-- HUD -->
+  <header id="hud" class="hidden">
+    <div class="hud-left glass">
+      <div class="brand"><span class="coin-ico">₹</span><div><b>UPI</b><small>Uday's Product Interface</small></div></div>
+      <ol class="stepper" id="stepper"></ol>
+      <div class="utr mono" id="utr"></div>
+    </div>
+    <div class="hud-right">
+      <div class="glass stat"><small>VALUE SETTLED</small><b class="mono" id="score">₹0</b></div>
+      <div class="glass stat"><small>SKILL WALLET</small><b class="mono" id="wallet">0</b></div>
+      <div class="hud-btns">
+        <button class="icon-btn glass" id="btn-sound" aria-label="Toggle sound" title="Sound (S)"></button>
+        <button class="icon-btn glass" id="btn-passbook" aria-label="Open passbook" title="Passbook (P)"></button>
+        <button class="icon-btn glass" id="btn-help" aria-label="Controls" title="Controls (H)"></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ROUTE BAR -->
+  <nav id="route" class="hidden glass" aria-label="Career route">
+    <div class="route-line"><div class="route-fill" id="route-fill"></div><div class="route-me" id="route-me"><span>₹</span></div></div>
+    <ol id="route-stops"></ol>
+  </nav>
+
+  <!-- TOUCH CONTROLS -->
+  <div id="touch" class="hidden" aria-hidden="true">
+    <button data-act="left">‹</button>
+    <button data-act="boost" class="boost">⚡</button>
+    <button data-act="right">›</button>
+  </div>
+
+  <!-- NODE CARD -->
+  <aside id="card" class="card" role="dialog" aria-modal="false" aria-labelledby="card-title" hidden>
+    <div class="card-inner" id="card-inner"></div>
+  </aside>
+
+  <!-- HELP -->
+  <div id="help" class="glass popover" hidden>
+    <h3>Controls</h3>
+    <ul class="keys">
+      <li><kbd>←</kbd><kbd>→</kbd> / <kbd>A</kbd><kbd>D</kbd> switch lane</li>
+      <li><kbd>Space</kbd> / <kbd>↑</kbd> hold to boost</li>
+      <li><kbd>Enter</kbd> continue from a node</li>
+      <li><kbd>P</kbd> passbook · <kbd>S</kbd> sound · <kbd>H</kbd> help</li>
+      <li>Click the route bar to fast-travel</li>
+      <li>Phone: swipe to change lane, ⚡ to boost</li>
+    </ul>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <!-- PASSBOOK -->
+  <div id="passbook" role="dialog" aria-modal="true" aria-label="Passbook résumé" hidden>
+    <div class="pb-sheet" id="pb-sheet"></div>
+  </div>
+
+  <script type="module" src="./ui.js"></script>
+</body>
+</html>
